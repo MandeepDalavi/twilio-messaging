@@ -28,6 +28,15 @@ app.get("/text", (req, res) => {
       res.send(`Message sent: ${message.sid}`);
     });
 });
+
+app.post("/incoming", (req, res) => {
+  console.log(req.body.Body);
+  const twiml = new MessagingResponse();
+  twiml.message("Hello!");
+  res.writeHead(200, {"Content-Type": "text/xml"});
+  res.end(twiml.toString());
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at "http://localhost:${port}`);
 });
